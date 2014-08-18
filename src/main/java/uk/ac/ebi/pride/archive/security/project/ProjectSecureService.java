@@ -10,14 +10,9 @@ import java.util.Collection;
 
 /**
  * @author Jose A. Dianes
- * @author florian@ebi.ac.uk
- * @since 0.0.1
+ * @version $Id$
  */
 public interface ProjectSecureService extends ProjectService {
-
-    // use PostAuthorize/PostFilter since for authentication we need to retrieve the
-    // Project record anyway, so if using PreAuthorize we may have to query the record
-    // twice, once for authorisation and again for the actual query
 
     @Override
     @PostAuthorize("hasPermission(returnObject, 'isAccessibleProject') or hasRole('ADMINISTRATOR')")

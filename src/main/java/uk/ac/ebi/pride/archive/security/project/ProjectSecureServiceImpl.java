@@ -13,7 +13,6 @@ import java.util.Collection;
  * @author Rui Wang
  * @version $Id$
  */
-@SuppressWarnings("unused")
 @Service
 public class ProjectSecureServiceImpl implements ProjectSecureService {
 

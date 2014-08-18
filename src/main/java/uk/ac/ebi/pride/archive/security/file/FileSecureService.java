@@ -10,7 +10,7 @@ import java.util.Collection;
 
 /**
  * @author Jose A. Dianes
- * @since 0.0.1
+ * @version $Id$
  */
 public interface FileSecureService extends FileService {
 

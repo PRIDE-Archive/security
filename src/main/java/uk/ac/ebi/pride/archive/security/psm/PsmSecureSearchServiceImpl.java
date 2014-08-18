@@ -14,7 +14,6 @@ import java.util.List;
  * @author Florian Reisinger
  * @since 0.1.0
  */
-@SuppressWarnings("unused")
 @Service
 public class PsmSecureSearchServiceImpl implements PsmSecureSearchService {
 
@@ -29,11 +28,6 @@ public class PsmSecureSearchServiceImpl implements PsmSecureSearchService {
     }
 
     @Override
-    public Long countByPeptideSequenceAndProjectAccession(String peptideSequence, String projectAccession) {
-        return this.psmSearchService.countByPeptideSequenceAndProjectAccession(peptideSequence, projectAccession);
-    }
-
-    @Override
     public List<Psm> findByPeptideSubSequenceAndProjectAccession(String peptideSequence, String projectAccession) {
         return this.psmSearchService.findByPeptideSubSequenceAndProjectAccession(peptideSequence, projectAccession);
     }
@@ -44,10 +38,6 @@ public class PsmSecureSearchServiceImpl implements PsmSecureSearchService {
     }
 
     @Override
-    public Long countByPeptideSequenceAndAssayAccession(String peptideSequence, String assayAccession) {
-        return this.psmSearchService.countByPeptideSequenceAndAssayAccession(peptideSequence, assayAccession);
-    }
-    @Override
     public List<Psm> findByPeptideSubSequenceAndAssayAccession(String peptideSequence, String assayAccession) {
         return this.psmSearchService.findByPeptideSubSequenceAndAssayAccession(peptideSequence, assayAccession);
     }
@@ -55,11 +45,6 @@ public class PsmSecureSearchServiceImpl implements PsmSecureSearchService {
     @Override
     public List<Psm> findByProjectAccession(String projectAccession) {
         return this.psmSearchService.findByProjectAccession(projectAccession);
-    }
-
-    @Override
-    public Long countByProjectAccession(String projectAccession) {
-        return this.psmSearchService.countByProjectAccession(projectAccession);
     }
 
     @Override
@@ -80,11 +65,6 @@ public class PsmSecureSearchServiceImpl implements PsmSecureSearchService {
     @Override
     public List<Psm> findByAssayAccession(String assayAccession) {
         return this.psmSearchService.findByAssayAccession(assayAccession);
-    }
-
-    @Override
-    public Long countByAssayAccession(String assayAccession) {
-        return this.psmSearchService.countByAssayAccession(assayAccession);
     }
 
     @Override
