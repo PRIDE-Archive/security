@@ -2,6 +2,7 @@ package uk.ac.ebi.pride.archive.security.psm;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.solr.core.query.result.HighlightPage;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PreFilter;
 import uk.ac.ebi.pride.psmindex.search.model.Psm;
@@ -9,6 +10,7 @@ import uk.ac.ebi.pride.psmindex.search.model.Psm;
 import java.lang.String;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -100,6 +102,18 @@ public interface PsmSecureSearchService {
     @PreFilter(filterTarget = "assayAccessions", value = "hasPermission(filterObject, 'isAccessibleAssayAccession')")
     public Page<Psm> findByAssayAccession(Collection<String> assayAccessions, Pageable pageable);
 
+    @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
+    public Map<String, Long> findByAssayAccessionFacetOnModificationNames(String assayAccession, String term, List<String> modNameFilters);
+
+    @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
+    public Map<String, Long> findByAssayAccessionFacetOnModificationSynonyms(String assayAccession, String term, List<String> modSynonymFilters);
+
+    @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
+    public HighlightPage<Psm> findByAssayAccessionHighlightsOnModificationNames(String assayAccession, String term, List<String> modNameFilters, Pageable pageable);
+
+    @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
+    public HighlightPage<Psm> findByAssayAccessionHighlightsOnModificationSynonyms(String assayAccession, String term, List<String> modSynonymFilters, Pageable pageable);
+
 //    @PreAuthorize("hasRole('ADMINISTRATOR')")
 //    @PostFilter("hasPermission(filterObject.projectAccession, 'isAccessibleProjectAccession')")
 //    public List<Psm> findBySpectrumId(String spectrumId);
@@ -131,5 +145,5 @@ public interface PsmSecureSearchService {
     @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
     public List<String> findPeptideSequencesByProjectAccession(String projectAccession);
 
-    
+
 }
