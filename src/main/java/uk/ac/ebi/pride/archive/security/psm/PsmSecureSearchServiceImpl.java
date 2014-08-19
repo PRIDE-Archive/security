@@ -3,12 +3,14 @@ package uk.ac.ebi.pride.archive.security.psm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.solr.core.query.result.HighlightPage;
 import org.springframework.stereotype.Service;
 import uk.ac.ebi.pride.psmindex.search.model.Psm;
 import uk.ac.ebi.pride.psmindex.search.service.PsmSearchService;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Florian Reisinger
@@ -100,6 +102,30 @@ public class PsmSecureSearchServiceImpl implements PsmSecureSearchService {
     @Override
     public Page<Psm> findByAssayAccession(Collection<String> assayAccessions, Pageable pageable) {
         return this.psmSearchService.findByAssayAccession(assayAccessions, pageable);
+    }
+
+    @Override
+    public Map<String, Long> findByAssayAccessionFacetOnModificationNames(
+            String assayAccession, String term, List<String> modNameFilters){
+        return this.psmSearchService.findByAssayAccessionFacetOnModificationSynonyms(assayAccession, term, modNameFilters);
+    }
+
+    @Override
+    public Map<String, Long> findByAssayAccessionFacetOnModificationSynonyms(
+            String assayAccession, String term, List<String> modSynonymFilters){
+        return this.psmSearchService.findByAssayAccessionFacetOnModificationSynonyms(assayAccession, term, modSynonymFilters);
+    }
+
+    @Override
+    public HighlightPage<Psm> findByAssayAccessionHighlightsOnModificationNames(
+            String assayAccession, String term, List<String> modNameFilters, Pageable pageable) {
+        return this.psmSearchService.findByAssayAccessionHighlightsOnModificationNames(assayAccession, term, modNameFilters, pageable);
+    }
+
+    @Override
+    public HighlightPage<Psm> findByAssayAccessionHighlightsOnModificationSynonyms(
+            String assayAccession, String term, List<String> modSynonymFilters, Pageable pageable) {
+        return this.psmSearchService.findByAssayAccessionHighlightsOnModificationSynonyms(assayAccession, term, modSynonymFilters, pageable);
     }
 
     @Override
