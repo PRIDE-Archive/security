@@ -22,6 +22,11 @@ public class ProteinIdentificationSecureSearchServiceImpl implements ProteinIden
     ProteinIdentificationSearchService proteinIdentificationSearchService;
 
     @Override
+    public List<ProteinIdentification> findBySynonymAndProjectAccession(String synonym, String projectAccession) {
+        return proteinIdentificationSearchService.findBySynonymAndProjectAccession(synonym, projectAccession);
+    }
+
+    @Override
     public List<ProteinIdentification> findByProjectAccession(String projectAccession) {
         return proteinIdentificationSearchService.findByProjectAccession(projectAccession);
     }
@@ -59,5 +64,10 @@ public class ProteinIdentificationSecureSearchServiceImpl implements ProteinIden
     @Override
     public Page<ProteinIdentification> findByAssayAccession(Collection<String> assayAccessions, Pageable pageable) {
         return proteinIdentificationSearchService.findByAssayAccession(assayAccessions, pageable);
+    }
+
+    @Override
+    public List<ProteinIdentification> findBySubmittedAccessionAndAssayAccession(String submittedAccession, String assayAccession){
+        return proteinIdentificationSearchService.findBySubmittedAccessionAndAssayAccession(submittedAccession, assayAccession);
     }
 }
