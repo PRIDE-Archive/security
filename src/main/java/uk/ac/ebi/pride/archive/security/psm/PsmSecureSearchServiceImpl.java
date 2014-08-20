@@ -107,7 +107,7 @@ public class PsmSecureSearchServiceImpl implements PsmSecureSearchService {
     @Override
     public Map<String, Long> findByAssayAccessionFacetOnModificationNames(
             String assayAccession, String term, List<String> modNameFilters){
-        return this.psmSearchService.findByAssayAccessionFacetOnModificationSynonyms(assayAccession, term, modNameFilters);
+        return this.psmSearchService.findByAssayAccessionFacetOnModificationNames(assayAccession, term, modNameFilters);
     }
 
     @Override
