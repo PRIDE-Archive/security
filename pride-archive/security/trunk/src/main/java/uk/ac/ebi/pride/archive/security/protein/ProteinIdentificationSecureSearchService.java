@@ -34,10 +34,9 @@ public interface ProteinIdentificationSecureSearchService {
 //    public List<ProteinIdentification> findById(Collection<String> ids);// id = submitted protein  accession
 
     @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
-    public List<ProteinIdentification> findBySynonymAndProjectAccession(String synonym, String projectAccession);
-
-    @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
     public List<ProteinIdentification> findByProjectAccession(String projectAccession);
+    @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
+    public Long countByProjectAccession(String projectAccession);
 
     @PreAuthorize("hasRole('ADMINISTRATOR')")
     @PreFilter(filterTarget = "projectAccessions", value = "hasPermission(filterObject, 'isAccessibleProjectAccession')")
@@ -52,6 +51,8 @@ public interface ProteinIdentificationSecureSearchService {
 
     @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
     public List<ProteinIdentification> findByAssayAccession(String assayAccession);
+    @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
+    public Long countByAssayAccession(String assayAccession);
 
     @PreAuthorize("hasRole('ADMINISTRATOR')")
     @PreFilter(filterTarget = "assayAccessions", value = "hasPermission(filterObject, 'isAccessibleAssayAccession')")
