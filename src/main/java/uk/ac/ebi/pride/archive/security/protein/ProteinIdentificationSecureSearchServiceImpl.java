@@ -22,13 +22,13 @@ public class ProteinIdentificationSecureSearchServiceImpl implements ProteinIden
     ProteinIdentificationSearchService proteinIdentificationSearchService;
 
     @Override
-    public List<ProteinIdentification> findBySynonymAndProjectAccession(String synonym, String projectAccession) {
-        return proteinIdentificationSearchService.findBySynonymAndProjectAccession(synonym, projectAccession);
+    public List<ProteinIdentification> findByProjectAccession(String projectAccession) {
+        return proteinIdentificationSearchService.findByProjectAccession(projectAccession);
     }
 
     @Override
-    public List<ProteinIdentification> findByProjectAccession(String projectAccession) {
-        return proteinIdentificationSearchService.findByProjectAccession(projectAccession);
+    public Long countByProjectAccession(String projectAccession) {
+        return proteinIdentificationSearchService.countByProjectAccession(projectAccession);
     }
 
     @Override
@@ -49,6 +49,11 @@ public class ProteinIdentificationSecureSearchServiceImpl implements ProteinIden
     @Override
     public List<ProteinIdentification> findByAssayAccession(String assayAccession) {
         return proteinIdentificationSearchService.findByAssayAccession(assayAccession);
+    }
+
+    @Override
+    public Long countByAssayAccession(String assayAccession) {
+        return proteinIdentificationSearchService.countByAssayAccession(assayAccession);
     }
 
     @Override
