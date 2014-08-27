@@ -27,6 +27,15 @@
         <protein.identification.index.search.version>0.1.0-SNAPSHOT</protein.identification.index.search.version>
     </properties>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
         <!-- PRIDE dependencies -->
 
