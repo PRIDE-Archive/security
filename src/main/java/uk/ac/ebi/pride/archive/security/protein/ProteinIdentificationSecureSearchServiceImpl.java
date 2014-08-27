@@ -22,6 +22,11 @@ public class ProteinIdentificationSecureSearchServiceImpl implements ProteinIden
     ProteinIdentificationSearchService proteinIdentificationSearchService;
 
     @Override
+    public List<ProteinIdentification> findBySynonymAndProjectAccession(String synonym, String projectAccession) {
+        return proteinIdentificationSearchService.findBySynonymAndProjectAccession(synonym, projectAccession);
+    }
+
+    @Override
     public List<ProteinIdentification> findByProjectAccession(String projectAccession) {
         return proteinIdentificationSearchService.findByProjectAccession(projectAccession);
     }
