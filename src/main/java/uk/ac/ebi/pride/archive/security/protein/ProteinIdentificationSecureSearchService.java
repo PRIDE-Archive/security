@@ -5,9 +5,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PreFilter;
 import uk.ac.ebi.pride.proteinidentificationindex.search.model.ProteinIdentification;
+import uk.ac.ebi.pride.proteinidentificationindex.search.model.ProteinIdentificationSummary;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author florian@ebi.ac.uk
@@ -71,5 +73,19 @@ public interface ProteinIdentificationSecureSearchService {
     // Submitted accession query methods
     @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
     public List<ProteinIdentification> findBySubmittedAccessionAndAssayAccession(String submittedAccession, String assayAccession);
+
+
+
+    @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
+    public List<ProteinIdentificationSummary> findSummaryByProjectAccession(String projectAccession);
+
+    @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
+    public Set<String> getUniqueProteinAccessionsByProjectAccession(String projectAccession);
+
+    @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
+    public List<ProteinIdentificationSummary> findSummaryByAssayAccession(String assayAccession);
+
+    @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
+    public Set<String> getUniqueProteinAccessionsByAssayAccession(String assayAccession);
 
 }

@@ -5,10 +5,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import uk.ac.ebi.pride.proteinidentificationindex.search.model.ProteinIdentification;
+import uk.ac.ebi.pride.proteinidentificationindex.search.model.ProteinIdentificationSummary;
 import uk.ac.ebi.pride.proteinidentificationindex.search.service.ProteinIdentificationSearchService;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author florian@ebi.ac.uk
@@ -79,5 +81,26 @@ public class ProteinIdentificationSecureSearchServiceImpl implements ProteinIden
     @Override
     public List<ProteinIdentification> findBySubmittedAccessionAndAssayAccession(String submittedAccession, String assayAccession){
         return proteinIdentificationSearchService.findBySubmittedAccessionAndAssayAccession(submittedAccession, assayAccession);
+    }
+
+
+    @Override
+    public List<ProteinIdentificationSummary> findSummaryByProjectAccession(String projectAccession) {
+        return proteinIdentificationSearchService.findSummaryByProjectAccession(projectAccession);
+    }
+
+    @Override
+    public Set<String> getUniqueProteinAccessionsByProjectAccession(String projectAccession) {
+        return proteinIdentificationSearchService.getUniqueProteinAccessionsByProjectAccession(projectAccession);
+    }
+
+    @Override
+    public List<ProteinIdentificationSummary> findSummaryByAssayAccession(String assayAccession) {
+        return proteinIdentificationSearchService.findSummaryByAssayAccession(assayAccession);
+    }
+
+    @Override
+    public Set<String> getUniqueProteinAccessionsByAssayAccession(String assayAccession) {
+        return proteinIdentificationSearchService.getUniqueProteinAccessionsByAssayAccession(assayAccession);
     }
 }
