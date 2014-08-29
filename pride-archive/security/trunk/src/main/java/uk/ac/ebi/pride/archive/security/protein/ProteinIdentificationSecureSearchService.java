@@ -4,11 +4,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PreFilter;
+import uk.ac.ebi.pride.indexutils.results.PageWrapper;
 import uk.ac.ebi.pride.proteinidentificationindex.search.model.ProteinIdentification;
 import uk.ac.ebi.pride.proteinidentificationindex.search.model.ProteinIdentificationSummary;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -54,6 +56,12 @@ public interface ProteinIdentificationSecureSearchService {
     @PreFilter(filterTarget = "projectAccessions", value = "hasPermission(filterObject, 'isAccessibleProjectAccession')")
     public Page<ProteinIdentification> findByProjectAccession(Collection<String> projectAccessions, Pageable pageable);
 
+    @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
+    public Map<String, Long> findByProjectAccessionFacetOnModificationNames(String projectAccession, String term, List<String> modNameFilters);
+
+    @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
+    public PageWrapper<ProteinIdentification> findByProjectAccessionHighlightsOnModificationNames(String projectAccession, String term, List<String> modNameFilters, Pageable pageable);
+
     @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
     public List<ProteinIdentification> findByAssayAccession(String assayAccession);
     @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
@@ -70,11 +78,15 @@ public interface ProteinIdentificationSecureSearchService {
     @PreFilter(filterTarget = "assayAccessions", value = "hasPermission(filterObject, 'isAccessibleAssayAccession')")
     public Page<ProteinIdentification> findByAssayAccession(Collection<String> assayAccessions, Pageable pageable);
 
+    @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
+    public Map<String, Long> findByAssayAccessionFacetOnModificationNames(String assayAccession, String term, List<String> modNameFilters);
+
+    @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
+    public PageWrapper<ProteinIdentification> findByAssayAccessionHighlightsOnModificationNames(String assayAccession, String term, List<String> modNameFilters, Pageable pageable);
+
     // Submitted accession query methods
     @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
     public List<ProteinIdentification> findBySubmittedAccessionAndAssayAccession(String submittedAccession, String assayAccession);
-
-
 
     @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
     public List<ProteinIdentificationSummary> findSummaryByProjectAccession(String projectAccession);
