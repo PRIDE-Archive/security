@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.solr.core.query.result.HighlightPage;
 import org.springframework.stereotype.Service;
+import uk.ac.ebi.pride.indexutils.results.PageWrapper;
 import uk.ac.ebi.pride.psmindex.search.model.Psm;
 import uk.ac.ebi.pride.psmindex.search.service.PsmSearchService;
 
@@ -80,6 +81,26 @@ public class PsmSecureSearchServiceImpl implements PsmSecureSearchService {
     }
 
     @Override
+    public Map<String, Long> findByProjectAccessionFacetOnModificationNames(String projectAccession, String term, List<String> modNameFilters) {
+        return this.psmSearchService.findByProjectAccessionFacetOnModificationNames(projectAccession, term, modNameFilters);
+    }
+
+    @Override
+    public Map<String, Long> findByProjectAccessionFacetOnModificationSynonyms(String projectAccession, String term, List<String> modSynonymFilters) {
+        return this.psmSearchService.findByProjectAccessionFacetOnModificationSynonyms(projectAccession, term, modSynonymFilters);
+    }
+
+    @Override
+    public PageWrapper<Psm> findByProjectAccessionHighlightsOnModificationNames(String projectAccession, String term, List<String> modNameFilters, Pageable pageable) {
+        return this.psmSearchService.findByProjectAccessionHighlightsOnModificationNames(projectAccession, term, modNameFilters, pageable);
+    }
+
+    @Override
+    public PageWrapper<Psm> findByProjectAccessionHighlightsOnModificationSynonyms(String projectAccession, String term, List<String> modSynonymFilters, Pageable pageable) {
+        return this.psmSearchService.findByProjectAccessionHighlightsOnModificationSynonyms(projectAccession, term, modSynonymFilters, pageable);
+    }
+
+    @Override
     public List<Psm> findByAssayAccession(String assayAccession) {
         return this.psmSearchService.findByAssayAccession(assayAccession);
     }
@@ -117,13 +138,13 @@ public class PsmSecureSearchServiceImpl implements PsmSecureSearchService {
     }
 
     @Override
-    public HighlightPage<Psm> findByAssayAccessionHighlightsOnModificationNames(
+    public PageWrapper<Psm> findByAssayAccessionHighlightsOnModificationNames(
             String assayAccession, String term, List<String> modNameFilters, Pageable pageable) {
         return this.psmSearchService.findByAssayAccessionHighlightsOnModificationNames(assayAccession, term, modNameFilters, pageable);
     }
 
     @Override
-    public HighlightPage<Psm> findByAssayAccessionHighlightsOnModificationSynonyms(
+    public PageWrapper<Psm> findByAssayAccessionHighlightsOnModificationSynonyms(
             String assayAccession, String term, List<String> modSynonymFilters, Pageable pageable) {
         return this.psmSearchService.findByAssayAccessionHighlightsOnModificationSynonyms(assayAccession, term, modSynonymFilters, pageable);
     }

@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import uk.ac.ebi.pride.indexutils.results.PageWrapper;
 import uk.ac.ebi.pride.proteinidentificationindex.search.model.ProteinIdentification;
 import uk.ac.ebi.pride.proteinidentificationindex.search.model.ProteinIdentificationSummary;
 import uk.ac.ebi.pride.proteinidentificationindex.search.service.ProteinIdentificationSearchService;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -36,6 +38,16 @@ public class ProteinIdentificationSecureSearchServiceImpl implements ProteinIden
     @Override
     public Long countByProjectAccession(String projectAccession) {
         return proteinIdentificationSearchService.countByProjectAccession(projectAccession);
+    }
+
+    @Override
+    public Map<String, Long> findByProjectAccessionFacetOnModificationNames(String projectAccession, String term, List<String> modNameFilters) {
+        return proteinIdentificationSearchService.findByProjectAccessionFacetOnModificationNames(projectAccession, term, modNameFilters);
+    }
+
+    @Override
+    public PageWrapper<ProteinIdentification> findByProjectAccessionHighlightsOnModificationNames(String projectAccession, String term, List<String> modNameFilters, Pageable pageable) {
+        return proteinIdentificationSearchService.findByProjectAccessionHighlightsOnModificationNames(projectAccession, term, modNameFilters, pageable);
     }
 
     @Override
@@ -79,7 +91,17 @@ public class ProteinIdentificationSecureSearchServiceImpl implements ProteinIden
     }
 
     @Override
-    public List<ProteinIdentification> findBySubmittedAccessionAndAssayAccession(String submittedAccession, String assayAccession){
+    public Map<String, Long> findByAssayAccessionFacetOnModificationNames(String assayAccession, String term, List<String> modNameFilters) {
+        return proteinIdentificationSearchService.findByAssayAccessionFacetOnModificationNames(assayAccession, term, modNameFilters);
+    }
+
+    @Override
+    public PageWrapper<ProteinIdentification> findByAssayAccessionHighlightsOnModificationNames(String assayAccession, String term, List<String> modNameFilters, Pageable pageable) {
+        return proteinIdentificationSearchService.findByAssayAccessionHighlightsOnModificationNames(assayAccession, term, modNameFilters, pageable);
+    }
+
+    @Override
+    public List<ProteinIdentification> findBySubmittedAccessionAndAssayAccession(String submittedAccession, String assayAccession) {
         return proteinIdentificationSearchService.findBySubmittedAccessionAndAssayAccession(submittedAccession, assayAccession);
     }
 

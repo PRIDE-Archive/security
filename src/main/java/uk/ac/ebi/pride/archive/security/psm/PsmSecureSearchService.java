@@ -2,12 +2,11 @@ package uk.ac.ebi.pride.archive.security.psm;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.solr.core.query.result.HighlightPage;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PreFilter;
+import uk.ac.ebi.pride.indexutils.results.PageWrapper;
 import uk.ac.ebi.pride.psmindex.search.model.Psm;
 
-import java.lang.String;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -78,6 +77,18 @@ public interface PsmSecureSearchService {
     @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
     public Page<Psm> findByProjectAccession(String projectAccession, Pageable pageable);
 
+    @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
+    public Map<String, Long> findByProjectAccessionFacetOnModificationNames(String projectAccession, String term, List<String> modNameFilters);
+
+    @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
+    public Map<String, Long> findByProjectAccessionFacetOnModificationSynonyms(String projectAccession, String term, List<String> modSynonymFilters);
+
+    @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
+    public PageWrapper<Psm> findByProjectAccessionHighlightsOnModificationNames(String projectAccession, String term, List<String> modNameFilters, Pageable pageable);
+
+    @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
+    public PageWrapper<Psm> findByProjectAccessionHighlightsOnModificationSynonyms(String projectAccession, String term, List<String> modSynonymFilters, Pageable pageable);
+
     @PreAuthorize("hasRole('ADMINISTRATOR')")
     @PreFilter(filterTarget = "projectAccessions", value = "hasPermission(filterObject, 'isAccessibleProjectAccession')")
     public List<Psm> findByProjectAccession(Collection<String> projectAccessions);
@@ -109,10 +120,10 @@ public interface PsmSecureSearchService {
     public Map<String, Long> findByAssayAccessionFacetOnModificationSynonyms(String assayAccession, String term, List<String> modSynonymFilters);
 
     @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
-    public HighlightPage<Psm> findByAssayAccessionHighlightsOnModificationNames(String assayAccession, String term, List<String> modNameFilters, Pageable pageable);
+    public PageWrapper<Psm> findByAssayAccessionHighlightsOnModificationNames(String assayAccession, String term, List<String> modNameFilters, Pageable pageable);
 
     @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
-    public HighlightPage<Psm> findByAssayAccessionHighlightsOnModificationSynonyms(String assayAccession, String term, List<String> modSynonymFilters, Pageable pageable);
+    public PageWrapper<Psm> findByAssayAccessionHighlightsOnModificationSynonyms(String assayAccession, String term, List<String> modSynonymFilters, Pageable pageable);
 
 //    @PreAuthorize("hasRole('ADMINISTRATOR')")
 //    @PostFilter("hasPermission(filterObject.projectAccession, 'isAccessibleProjectAccession')")
