@@ -34,4 +34,8 @@ public class AssaySecureServiceImpl implements AssaySecureService {
         return assayService.findAllByProjectAccession(projectAccession);
     }
 
+    @Override
+    public Long countByProjectAccession(String projectAccession) {
+        return assayService.countByProjectAccession(projectAccession);
+    }
 }
