@@ -2,6 +2,7 @@ package uk.ac.ebi.pride.archive.security.assay;
 
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
+import org.springframework.security.access.prepost.PreAuthorize;
 import uk.ac.ebi.pride.archive.repo.assay.service.AssayAccessException;
 import uk.ac.ebi.pride.archive.repo.assay.service.AssayService;
 import uk.ac.ebi.pride.archive.repo.assay.service.AssaySummary;
@@ -29,4 +30,7 @@ public interface AssaySecureService extends AssayService {
     @PostFilter("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
     public java.util.Collection<AssaySummary> findAllByProjectAccession(String projectAccession);
 
+    @Override
+    @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
+    public Long countByProjectAccession(String projectAccession);
 }
