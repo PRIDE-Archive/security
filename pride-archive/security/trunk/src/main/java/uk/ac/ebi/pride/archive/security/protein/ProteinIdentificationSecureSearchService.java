@@ -38,10 +38,9 @@ public interface ProteinIdentificationSecureSearchService {
 //    public List<ProteinIdentification> findById(Collection<String> ids);// id = submitted protein  accession
 
     @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
-    public List<ProteinIdentification> findBySynonymAndProjectAccession(String synonym, String projectAccession);
-
-    @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
     public List<ProteinIdentification> findByProjectAccession(String projectAccession);
+    @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
+    public List<ProteinIdentification> findByProjectAccessionAndAnyMapping(String projectAccession, String accession);
     @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
     public Long countByProjectAccession(String projectAccession);
 
