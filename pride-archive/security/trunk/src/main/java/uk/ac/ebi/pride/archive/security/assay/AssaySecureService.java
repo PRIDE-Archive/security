@@ -1,7 +1,8 @@
 package uk.ac.ebi.pride.archive.security.assay;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
 import uk.ac.ebi.pride.archive.repo.assay.service.AssayAccessException;
 import uk.ac.ebi.pride.archive.repo.assay.service.AssayService;
@@ -27,8 +28,12 @@ public interface AssaySecureService extends AssayService {
     public AssaySummary findByAccession(String assayAccession) throws AssayAccessException;
 
     @Override
-    @PostFilter("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
+    @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
     public java.util.Collection<AssaySummary> findAllByProjectAccession(String projectAccession);
+
+    @Override
+    @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
+    public Page<AssaySummary> findAllByProjectAccession(String projectAccession, Pageable pageable);
 
     @Override
     @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")

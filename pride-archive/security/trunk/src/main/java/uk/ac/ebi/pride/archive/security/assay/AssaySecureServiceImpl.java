@@ -1,6 +1,8 @@
 package uk.ac.ebi.pride.archive.security.assay;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import uk.ac.ebi.pride.archive.repo.assay.service.AssayAccessException;
 import uk.ac.ebi.pride.archive.repo.assay.service.AssayService;
@@ -32,6 +34,11 @@ public class AssaySecureServiceImpl implements AssaySecureService {
     @Override
     public Collection<AssaySummary> findAllByProjectAccession(String projectAccession) {
         return assayService.findAllByProjectAccession(projectAccession);
+    }
+
+    @Override
+    public Page<AssaySummary> findAllByProjectAccession(String projectAccession, Pageable pageable) {
+        return assayService.findAllByProjectAccession(projectAccession, pageable);
     }
 
     @Override
