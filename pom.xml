@@ -21,10 +21,10 @@
 
     <properties>
         <pride.web.utils.version>1.3.8</pride.web.utils.version>
-        <archive.repo.version>0.1.19-SNAPSHOT</archive.repo.version>
-        <archive.data.provider.api.version>2.0.6-SNAPSHOT</archive.data.provider.api.version>
-        <psm.index.search.version>0.1.5-SNAPSHOT</psm.index.search.version>
-        <protein.identification.index.search.version>0.1.1-SNAPSHOT</protein.identification.index.search.version>
+        <archive.repo.version>0.1.19</archive.repo.version>
+        <archive.data.provider.api.version>2.0.6</archive.data.provider.api.version>
+        <psm.index.search.version>0.1.5</psm.index.search.version>
+        <protein.identification.index.search.version>0.1.1</protein.identification.index.search.version>
     </properties>
 
     <build>
