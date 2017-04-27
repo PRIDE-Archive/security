@@ -21,14 +21,12 @@ import java.util.Map;
 @Service
 public class PsmSecureSearchServiceImpl implements PsmSecureSearchService {
 
-
     @Autowired
     PsmSearchService psmSearchService;
 
-
     @Override
-    public List<Psm> findByPeptideSequenceAndProjectAccession(String peptideSequence, String projectAccession) {
-        return this.psmSearchService.findByPeptideSequenceAndProjectAccession(peptideSequence, projectAccession);
+    public Page<Psm> findByPeptideSequenceAndProjectAccession(String peptideSequence, String projectAccession, Pageable pageable) {
+        return this.psmSearchService.findByPeptideSequenceAndProjectAccession(peptideSequence, projectAccession, pageable);
     }
 
     @Override
@@ -37,22 +35,13 @@ public class PsmSecureSearchServiceImpl implements PsmSecureSearchService {
     }
 
     @Override
-    public List<Psm> findByPeptideSubSequenceAndProjectAccession(String peptideSequence, String projectAccession) {
-        return this.psmSearchService.findByPeptideSubSequenceAndProjectAccession(peptideSequence, projectAccession);
-    }
-
-    @Override
-    public List<Psm> findByPeptideSequenceAndAssayAccession(String peptideSequence, String assayAccession) {
-        return this.psmSearchService.findByPeptideSequenceAndAssayAccession(peptideSequence, assayAccession);
+    public Page<Psm> findByPeptideSequenceAndAssayAccession(String peptideSequence, String assayAccession, Pageable pageable) {
+        return this.psmSearchService.findByPeptideSequenceAndAssayAccession(peptideSequence, assayAccession, pageable);
     }
 
     @Override
     public Long countByPeptideSequenceAndAssayAccession(String peptideSequence, String assayAccession) {
         return this.psmSearchService.countByPeptideSequenceAndAssayAccession(peptideSequence, assayAccession);
-    }
-    @Override
-    public List<Psm> findByPeptideSubSequenceAndAssayAccession(String peptideSequence, String assayAccession) {
-        return this.psmSearchService.findByPeptideSubSequenceAndAssayAccession(peptideSequence, assayAccession);
     }
 
     @Override
@@ -85,19 +74,10 @@ public class PsmSecureSearchServiceImpl implements PsmSecureSearchService {
         return this.psmSearchService.findByProjectAccessionFacetOnModificationNames(projectAccession, term, modNameFilters);
     }
 
-    @Override
-    public Map<String, Long> findByProjectAccessionFacetOnModificationSynonyms(String projectAccession, String term, List<String> modSynonymFilters) {
-        return this.psmSearchService.findByProjectAccessionFacetOnModificationSynonyms(projectAccession, term, modSynonymFilters);
-    }
 
     @Override
     public PageWrapper<Psm> findByProjectAccessionHighlightsOnModificationNames(String projectAccession, String term, List<String> modNameFilters, Pageable pageable) {
         return this.psmSearchService.findByProjectAccessionHighlightsOnModificationNames(projectAccession, term, modNameFilters, pageable);
-    }
-
-    @Override
-    public PageWrapper<Psm> findByProjectAccessionHighlightsOnModificationSynonyms(String projectAccession, String term, List<String> modSynonymFilters, Pageable pageable) {
-        return this.psmSearchService.findByProjectAccessionHighlightsOnModificationSynonyms(projectAccession, term, modSynonymFilters, pageable);
     }
 
     @Override
@@ -132,46 +112,24 @@ public class PsmSecureSearchServiceImpl implements PsmSecureSearchService {
     }
 
     @Override
-    public Map<String, Long> findByAssayAccessionFacetOnModificationSynonyms(
-            String assayAccession, String term, List<String> modSynonymFilters){
-        return this.psmSearchService.findByAssayAccessionFacetOnModificationSynonyms(assayAccession, term, modSynonymFilters);
-    }
-
-    @Override
     public PageWrapper<Psm> findByAssayAccessionHighlightsOnModificationNames(
             String assayAccession, String term, List<String> modNameFilters, Pageable pageable) {
         return this.psmSearchService.findByAssayAccessionHighlightsOnModificationNames(assayAccession, term, modNameFilters, pageable);
     }
 
     @Override
-    public PageWrapper<Psm> findByAssayAccessionHighlightsOnModificationSynonyms(
-            String assayAccession, String term, List<String> modSynonymFilters, Pageable pageable) {
-        return this.psmSearchService.findByAssayAccessionHighlightsOnModificationSynonyms(assayAccession, term, modSynonymFilters, pageable);
+    public Page<Psm> findByProteinAccessionAndProjectAccession(String proteinAccession, String projectAccession, Pageable pageable) {
+        return this.psmSearchService.findByProteinAccessionAndProjectAccession(proteinAccession, projectAccession, pageable);
     }
 
     @Override
-    public List<Psm> findByReportedIdAndProjectAccession(String reportedId, String projectAccession) {
-        return this.psmSearchService.findByReportedIdAndProjectAccession(reportedId, projectAccession);
+    public Page<Psm> findByProteinAccessionAndAssayAccession(String proteinAccession, String assayAccession, Pageable pageable) {
+        return this.psmSearchService.findByProteinAccessionAndAssayAccession(proteinAccession, assayAccession, pageable);
     }
 
     @Override
-    public List<Psm> findByReportedIdAndAssayAccession(String reportedId, String assayAccession) {
-        return this.psmSearchService.findByReportedIdAndAssayAccession(reportedId, assayAccession);
-    }
-
-    @Override
-    public List<Psm> findByProteinAccessionAndProjectAccession(String proteinAccession, String projectAccession) {
-        return this.psmSearchService.findByProteinAccessionAndProjectAccession(proteinAccession, projectAccession);
-    }
-
-    @Override
-    public List<Psm> findByProteinAccessionAndAssayAccession(String proteinAccession, String assayAccession) {
-        return this.psmSearchService.findByProteinAccessionAndAssayAccession(proteinAccession, assayAccession);
-    }
-
-    @Override
-    public List<String> findPeptideSequencesByProjectAccession(String projectAccession) {
-        return this.psmSearchService.findPeptideSequencesByProjectAccession(projectAccession);
+    public Page<String> findPeptideSequencesByProjectAccession(String projectAccession, Pageable pageable) {
+        return this.psmSearchService.findPeptideSequencesByProjectAccession(projectAccession, pageable);
     }
 
 }
