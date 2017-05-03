@@ -28,49 +28,20 @@ public interface PsmSecureSearchService {
     //       methods that allow querying for collections of values, should perhaps restrict the collection size
     //       in order to not generate too large result sets and to avoid the PostFilter with paging issue
 
-
-//    @PreAuthorize("hasRole('ADMINISTRATOR')")
-//    @PostFilter("hasPermission(filterObject.projectAccession, 'isAccessibleProjectAccession')")
-//    public List<Psm> findById(String id);
-
-//    @PreAuthorize("hasRole('ADMINISTRATOR')")
-//    @PostFilter("hasPermission(filterObject.projectAccession, 'isAccessibleProjectAccession')")
-//    public List<Psm> findById(Collection<String> ids);
-
-//    @PreAuthorize("hasRole('ADMINISTRATOR')")
-//    @PostFilter("hasPermission(filterObject.projectAccession, 'isAccessibleProjectAccession')")
-//    public List<Psm> findByPeptideSequence(String peptideSequence);
-
-//    @PreAuthorize("hasRole('ADMINISTRATOR')")
-//    @PostFilter("hasPermission(filterObject.projectAccession, 'isAccessibleProjectAccession')")
-//    public Page<Psm> findByPeptideSequence(String peptideSequence, Pageable pageable);
-
-//    @PreAuthorize("hasRole('ADMINISTRATOR')")
-//    @PostFilter("hasPermission(filterObject.projectAccession, 'isAccessibleProjectAccession')")
-//    public List<Psm> findByPeptideSubSequence(String peptideSequence);
-
-//    @PreAuthorize("hasRole('ADMINISTRATOR')")
-//    @PostFilter("hasPermission(filterObject.projectAccession, 'isAccessibleProjectAccession')")
-//    public Page<Psm> findByPeptideSubSequence(String peptideSequence, Pageable pageable);
-
     @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
-    public List<Psm> findByPeptideSequenceAndProjectAccession(String peptideSequence, String projectAccession);
+    public Page<Psm> findByPeptideSequenceAndProjectAccession(String peptideSequence, String projectAccession, Pageable pageable);
     @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
     public Long countByPeptideSequenceAndProjectAccession(String peptideSequence, String projectAccession);
 
-    @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
-    public List<Psm> findByPeptideSubSequenceAndProjectAccession(String peptideSequence, String projectAccession);
-
     @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
-    public List<Psm> findByPeptideSequenceAndAssayAccession(String peptideSequence, String assayAccession);
+    public Page<Psm> findByPeptideSequenceAndAssayAccession(String peptideSequence, String assayAccession, Pageable pageable);
+
     @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
     public Long countByPeptideSequenceAndAssayAccession(String peptideSequence, String assayAccession);
 
-    @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
-    public List<Psm> findByPeptideSubSequenceAndAssayAccession(String peptideSequence, String assayAccession);
-
     @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
     public List<Psm> findByProjectAccession(String projectAccession);
+
     @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
     public Long countByProjectAccession(String projectAccession);
 
@@ -81,13 +52,7 @@ public interface PsmSecureSearchService {
     public Map<String, Long> findByProjectAccessionFacetOnModificationNames(String projectAccession, String term, List<String> modNameFilters);
 
     @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
-    public Map<String, Long> findByProjectAccessionFacetOnModificationSynonyms(String projectAccession, String term, List<String> modSynonymFilters);
-
-    @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
     public PageWrapper<Psm> findByProjectAccessionHighlightsOnModificationNames(String projectAccession, String term, List<String> modNameFilters, Pageable pageable);
-
-    @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
-    public PageWrapper<Psm> findByProjectAccessionHighlightsOnModificationSynonyms(String projectAccession, String term, List<String> modSynonymFilters, Pageable pageable);
 
     @PreAuthorize("hasRole('ADMINISTRATOR')")
     @PreFilter(filterTarget = "projectAccessions", value = "hasPermission(filterObject, 'isAccessibleProjectAccession')")
@@ -99,6 +64,7 @@ public interface PsmSecureSearchService {
 
     @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
     public List<Psm> findByAssayAccession(String assayAccession);
+
     @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
     public Long countByAssayAccession(String assayAccession);
 
@@ -117,44 +83,14 @@ public interface PsmSecureSearchService {
     public Map<String, Long> findByAssayAccessionFacetOnModificationNames(String assayAccession, String term, List<String> modNameFilters);
 
     @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
-    public Map<String, Long> findByAssayAccessionFacetOnModificationSynonyms(String assayAccession, String term, List<String> modSynonymFilters);
-
-    @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
     public PageWrapper<Psm> findByAssayAccessionHighlightsOnModificationNames(String assayAccession, String term, List<String> modNameFilters, Pageable pageable);
 
-    @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
-    public PageWrapper<Psm> findByAssayAccessionHighlightsOnModificationSynonyms(String assayAccession, String term, List<String> modSynonymFilters, Pageable pageable);
-
-//    @PreAuthorize("hasRole('ADMINISTRATOR')")
-//    @PostFilter("hasPermission(filterObject.projectAccession, 'isAccessibleProjectAccession')")
-//    public List<Psm> findBySpectrumId(String spectrumId);
-//
-//    @PreAuthorize("hasRole('ADMINISTRATOR')")
-//    @PostFilter("hasPermission(filterObject.projectAccession, 'isAccessibleProjectAccession')")
-//    public List<Psm> findBySpectrumId(Collection<String> spectrumIds);
-//
-//    @PreAuthorize("hasRole('ADMINISTRATOR')")
-//    @PostFilter("hasPermission(filterObject.projectAccession, 'isAccessibleProjectAccession')")
-//    public List<Psm> findByReportedId(String reportedId);
-
     @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
-    public List<Psm> findByReportedIdAndProjectAccession(String reportedId, String projectAccession);
+    public Page<Psm> findByProteinAccessionAndProjectAccession(String proteinAccession, String projectAccession, Pageable pageable);
 
     @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
-    public List<Psm> findByReportedIdAndAssayAccession(String reportedId, String assayAccession);
-
-//    @PreAuthorize("hasRole('ADMINISTRATOR')")
-//    @PostFilter("hasPermission(filterObject.projectAccession, 'isAccessibleProjectAccession')")
-//    public List<Psm> findByProteinAccession(String proteinAccession);
+    public Page<Psm> findByProteinAccessionAndAssayAccession(String proteinAccession, String assayAccession, Pageable pageable);
 
     @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
-    public List<Psm> findByProteinAccessionAndProjectAccession(String proteinAccession, String projectAccession);
-
-    @PreAuthorize("hasPermission(#assayAccession, 'isAccessibleAssayAccession') or hasRole('ADMINISTRATOR')")
-    public List<Psm> findByProteinAccessionAndAssayAccession(String proteinAccession, String assayAccession);
-
-    @PreAuthorize("hasPermission(#projectAccession, 'isAccessibleProjectAccession') or hasRole('ADMINISTRATOR')")
-    public List<String> findPeptideSequencesByProjectAccession(String projectAccession);
-
-
+    public Page<String> findPeptideSequencesByProjectAccession(String projectAccession, Pageable pageable);
 }
