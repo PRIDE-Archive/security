@@ -11,7 +11,7 @@
     <groupId>uk.ac.ebi.pride.archive</groupId>
     <artifactId>archive-security</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
 
     <!-- To build the project:
            mvn clean package
@@ -145,6 +145,6 @@
         <connection>scm:git:https://github.com/PRIDE-Archive/security.git</connection>
         <developerConnection>scm:git:https://github.com/PRIDE-Archive/security.git</developerConnection>
         <url>https://github.com/PRIDE-Archive/security</url>
-        <tag>HEAD</tag>
+        <tag>archive-security-1.0.1</tag>
     </scm>
 </project>
