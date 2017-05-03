@@ -11,7 +11,7 @@
     <groupId>uk.ac.ebi.pride.archive</groupId>
     <artifactId>archive-security</artifactId>
     <packaging>jar</packaging>
-    <version>0.1.5-PSM_PROT_REDUCED_SCHEMA_MONGO_SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
 
     <!-- To build the project:
            mvn clean package
