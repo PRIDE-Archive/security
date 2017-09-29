@@ -2,16 +2,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>uk.ac.ebi.pride.archive</groupId>
+    <artifactId>archive-security</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0.2-SNAPSHOT</version>
+
     <parent>
         <groupId>uk.ac.ebi.pride.architectural</groupId>
         <artifactId>pride-core</artifactId>
         <version>1.0.1</version>
     </parent>
-
-    <groupId>uk.ac.ebi.pride.archive</groupId>
-    <artifactId>archive-security</artifactId>
-    <packaging>jar</packaging>
-    <version>1.0.2-SNAPSHOT</version>
 
     <!-- To build the project:
            mvn clean package
@@ -23,7 +23,7 @@
         <archive.data.provider.api.version>2.0.6</archive.data.provider.api.version>
         <psm.index.search.version>1.0.1</psm.index.search.version>
         <mongo.psm.index.search.version>1.0.0</mongo.psm.index.search.version>
-        <protein.identification.index.search.version>1.0.1</protein.identification.index.search.version>
+        <protein.identification.index.search.version>1.0.2</protein.identification.index.search.version>
         <mongo.protein.identification.index.search.version>1.0.0</mongo.protein.identification.index.search.version>
     </properties>
 
